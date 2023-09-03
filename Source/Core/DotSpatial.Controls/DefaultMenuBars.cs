@@ -38,7 +38,8 @@ namespace DotSpatial.Controls
         /// <param name="app">AppManager that contains the Map the tools should work on.</param>
         public DefaultMenuBars(AppManager app)
         {
-            if (app == null) throw new ArgumentNullException(nameof(app));
+            if (app == null)
+                throw new ArgumentNullException(nameof(app));
             App = app;
 
             App.MapChanged += (sender, args) => OnAppMapChanged(args);
@@ -60,7 +61,8 @@ namespace DotSpatial.Controls
         /// <param name="header">IHeaderControl the default tools should be added to.</param>
         public void Initialize(IHeaderControl header)
         {
-            if (header == null) throw new ArgumentNullException(nameof(header));
+            if (header == null)
+                throw new ArgumentNullException(nameof(header));
 
             AddItems(header);
             OnAppMapChanged(new MapChangedEventArgs(null, App.Map));
@@ -74,17 +76,17 @@ namespace DotSpatial.Controls
         private void AddItems(IHeaderControl header)
         {
             // Root items
-            header.Add(new RootItem(FileMenuKey, MessageStrings.File)
+            header.Add(new RootItem(FileMenuKey, "文件")
             {
                 SortOrder = -20
             });
-            header.Add(new RootItem(HomeMenuKey, MessageStrings.Home)
+            header.Add(new RootItem(HomeMenuKey, "家")
             {
                 SortOrder = -10
             });
 
             // Menu items
-            header.Add(new SimpleActionItem(FileMenuKey, Msg.File_New, NewProjectClick)
+            header.Add(new SimpleActionItem(FileMenuKey, "新建", NewProjectClick)
             {
                 GroupCaption = HeaderControl.ApplicationMenuKey,
                 SortOrder = 5,
@@ -92,7 +94,7 @@ namespace DotSpatial.Controls
                 LargeImage = Images.document_empty_32x32,
                 ToolTipText = Msg.FileNewToolTip
             });
-            header.Add(new SimpleActionItem(FileMenuKey, Msg.File_Open, OpenProjectClick)
+            header.Add(new SimpleActionItem(FileMenuKey, "打开文件", OpenProjectClick)
             {
                 GroupCaption = HeaderControl.ApplicationMenuKey,
                 SortOrder = 10,
@@ -100,14 +102,14 @@ namespace DotSpatial.Controls
                 LargeImage = Images.folder_32x32,
                 ToolTipText = Msg.FileOpenToolTip
             });
-            header.Add(new SimpleActionItem(FileMenuKey, Msg.File_Save, SaveProjectClick)
+            header.Add(new SimpleActionItem(FileMenuKey, "保存", SaveProjectClick)
             {
                 GroupCaption = HeaderControl.ApplicationMenuKey,
                 SortOrder = 15,
                 SmallImage = Images.disk_16x16,
                 LargeImage = Images.disk_32x32,
             });
-            header.Add(new SimpleActionItem(FileMenuKey, Msg.File_SaveAs, SaveProjectAsClick)
+            header.Add(new SimpleActionItem(FileMenuKey, "保存为", SaveProjectAsClick)
             {
                 GroupCaption = HeaderControl.ApplicationMenuKey,
                 SortOrder = 20,
@@ -116,12 +118,12 @@ namespace DotSpatial.Controls
                 ToolTipText = Msg.FileSaveAsToolTip
             });
 
-            header.Add(new SimpleActionItem(FileMenuKey, Msg.File_Options, OptionsClick)
+            header.Add(new SimpleActionItem(FileMenuKey, "选项", OptionsClick)
             {
                 GroupCaption = HeaderControl.ApplicationMenuKey,
                 SortOrder = 25
             });
-            header.Add(new SimpleActionItem(FileMenuKey, Msg.File_Print, PrintLayoutClick)
+            header.Add(new SimpleActionItem(FileMenuKey, "打印", PrintLayoutClick)
             {
                 GroupCaption = HeaderControl.ApplicationMenuKey,
                 SortOrder = 40,
@@ -129,7 +131,7 @@ namespace DotSpatial.Controls
                 LargeImage = Images.printer_32x32
             });
 
-            header.Add(new SimpleActionItem(FileMenuKey, Msg.File_Reset_Layout, ResetLayoutClick)
+            header.Add(new SimpleActionItem(FileMenuKey, "重置布局", ResetLayoutClick)
             {
                 GroupCaption = HeaderControl.ApplicationMenuKey,
                 SortOrder = 200,
@@ -137,26 +139,26 @@ namespace DotSpatial.Controls
                 LargeImage = Images.layout_delete_32x32
             });
 
-            header.Add(new SimpleActionItem(FileMenuKey, Msg.File_Exit, ExitClick)
+            header.Add(new SimpleActionItem(FileMenuKey, "退出", ExitClick)
             {
                 GroupCaption = HeaderControl.ApplicationMenuKey,
                 SortOrder = 5000,
             });
 
-            header.Add(new SimpleActionItem(HomeMenuKey, Msg.Add_Layer, AddLayerClick)
+            header.Add(new SimpleActionItem(HomeMenuKey, "添加图层", AddLayerClick)
             {
                 GroupCaption = Msg.Layers_Group,
                 SmallImage = Images.layer_add_16x16,
                 LargeImage = Images.layer_add_32x32
             });
-            header.Add(new SimpleActionItem(HomeMenuKey, Msg.Remove_Layer, RemoveLayerClick)
+            header.Add(new SimpleActionItem(HomeMenuKey, "移除图层", RemoveLayerClick)
             {
                 GroupCaption = Msg.Layers_Group,
                 SmallImage = Images.layer_remove_16x16,
                 LargeImage = Images.layer_remove_32x32
             });
 
-            header.Add(new SimpleActionItem(HomeMenuKey, Msg.Pan, PanToolClick)
+            header.Add(new SimpleActionItem(HomeMenuKey, "浏览", PanToolClick)
             {
                 Key = Msg.Pan,
                 GroupCaption = Msg.View_Group,
@@ -165,50 +167,50 @@ namespace DotSpatial.Controls
                 ToggleGroupKey = Msg.Map_Tools_Group
             });
 
-            header.Add(new SimpleActionItem(HomeMenuKey, Msg.Zoom_In, ZoomInClick)
+            header.Add(new SimpleActionItem(HomeMenuKey, "放大", ZoomInClick)
             {
                 Key = Msg.Zoom_In,
                 GroupCaption = Msg.Zoom_Group,
-                ToolTipText = Msg.Zoom_In_Tooltip,
+                ToolTipText = "放大",
                 SmallImage = Images.zoom_in_16x16,
                 LargeImage = Images.zoom_in_32x32,
                 ToggleGroupKey = Msg.Map_Tools_Group
             });
-            header.Add(new SimpleActionItem(HomeMenuKey, Msg.Zoom_Out, ZoomOutClick)
+            header.Add(new SimpleActionItem(HomeMenuKey, "缩小", ZoomOutClick)
             {
                 Key = Msg.Zoom_Out,
                 GroupCaption = Msg.Zoom_Group,
-                ToolTipText = Msg.Zoom_Out_Tooltip,
+                ToolTipText = "缩小",
                 SmallImage = Images.zoom_out_16x16,
                 LargeImage = Images.zoom_out_32x32,
                 ToggleGroupKey = Msg.Map_Tools_Group
             });
-            header.Add(new SimpleActionItem(HomeMenuKey, Msg.Zoom_To_Extents, ZoomToMaxExtentsClick)
+            header.Add(new SimpleActionItem(HomeMenuKey, "全局显示", ZoomToMaxExtentsClick)
             {
                 GroupCaption = Msg.Zoom_Group,
-                ToolTipText = Msg.Zoom_To_Extents_Tooltip,
+                ToolTipText = "全局显示",
                 SmallImage = Images.zoom_extend_16x16,
                 LargeImage = Images.zoom_extend_32x32
             });
-            _zoomPrevious = new SimpleActionItem(HomeMenuKey, Msg.Zoom_Previous, ZoomPreviousClick)
+            _zoomPrevious = new SimpleActionItem(HomeMenuKey, "上一个缩放", ZoomPreviousClick)
             {
                 GroupCaption = Msg.Zoom_Group,
-                ToolTipText = Msg.Zoom_Previous_Tooltip,
+                ToolTipText = "上一个缩放",
                 SmallImage = Images.zoom_to_previous_16,
                 LargeImage = Images.zoom_to_previous,
                 Enabled = false
             };
             header.Add(_zoomPrevious);
-            _zoomNext = new SimpleActionItem(HomeMenuKey, Msg.Zoom_Next, ZoomNextClick)
+            _zoomNext = new SimpleActionItem(HomeMenuKey, "下一个缩放", ZoomNextClick)
             {
                 GroupCaption = Msg.Zoom_Group,
-                ToolTipText = Msg.Zoom_Next_Tooltip,
+                ToolTipText = "下一个缩放",
                 SmallImage = Images.zoom_to_next_16,
                 LargeImage = Images.zoom_to_next,
                 Enabled = false
             };
             header.Add(_zoomNext);
-            _zoomToLayer = new SimpleActionItem(HomeMenuKey, Msg.Zoom_To_Layer, ZoomToLayerClick)
+            _zoomToLayer = new SimpleActionItem(HomeMenuKey, "缩放到图层", ZoomToLayerClick)
             {
                 GroupCaption = Msg.Zoom_Group,
                 SmallImage = Images.zoom_layer_16x16,
@@ -216,14 +218,14 @@ namespace DotSpatial.Controls
             };
             header.Add(_zoomToLayer);
 
-            header.Add(new SimpleActionItem(HomeMenuKey, Msg.Zoom_To_Coordinates, CoordinatesClick)
+            header.Add(new SimpleActionItem(HomeMenuKey, "缩放到坐标", CoordinatesClick)
             {
                 GroupCaption = Msg.Zoom_Group,
                 SmallImage = Images.zoom_coordinate_16x16,
                 LargeImage = Images.zoom_coordinate_32x32
             });
 
-            header.Add(new SimpleActionItem(HomeMenuKey, Msg.Select, SelectionToolClick)
+            header.Add(new SimpleActionItem(HomeMenuKey, "选择", SelectionToolClick)
             {
                 Key = Msg.Select,
                 GroupCaption = Msg.Map_Tools_Group,
@@ -232,7 +234,7 @@ namespace DotSpatial.Controls
                 ToggleGroupKey = Msg.Map_Tools_Group
             });
 
-            header.Add(new SimpleActionItem(HomeMenuKey, Msg.Deselect, DeselectAllClick)
+            header.Add(new SimpleActionItem(HomeMenuKey, "取消选择", DeselectAllClick)
             {
                 Key = Msg.Deselect,
                 GroupCaption = Msg.Map_Tools_Group,
@@ -240,7 +242,7 @@ namespace DotSpatial.Controls
                 LargeImage = Images.deselect_32x32
             });
 
-            header.Add(new SimpleActionItem(HomeMenuKey, Msg.Identify, IdentifierToolClick)
+            header.Add(new SimpleActionItem(HomeMenuKey, "识别", IdentifierToolClick)
             {
                 GroupCaption = Msg.Map_Tools_Group,
                 SmallImage = Images.info_rhombus_16x16,
