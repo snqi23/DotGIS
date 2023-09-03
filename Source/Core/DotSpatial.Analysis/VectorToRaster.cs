@@ -177,13 +177,15 @@ namespace DotSpatial.Analysis
             var output = Raster.Create(outputFileName, driverCode, w, h, 1, tp, options);
             output.Bounds = new RasterBounds(h, w, env);
 
-            double noDataValue = output.NoDataValue;
-
+            //double noDataValue = output.NoDataValue;
+            //double noDataValue = output.NoDataValue;
+            double noDataValue = 0;
+            output.NoDataValue = 0;
             if (fieldName != "FID")
             {
                 // We can't use this method to calculate Max on a non-existent FID field.
-                double dtMax = Convert.ToDouble(fs.DataTable.Compute("Max(" + fieldName + ")", string.Empty));
-                double dtMin = Convert.ToDouble(fs.DataTable.Compute("Min(" + fieldName + ")", string.Empty));
+                double dtMax = Convert.ToDouble(fs.DataTable.Compute($"Max([{fieldName}])", string.Empty));
+                double dtMin = Convert.ToDouble(fs.DataTable.Compute($"Min([{fieldName}])", string.Empty));
 
                 if (dtMin <= noDataValue && dtMax >= noDataValue)
                 {
